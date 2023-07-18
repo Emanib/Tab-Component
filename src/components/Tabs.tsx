@@ -1,18 +1,6 @@
-import React, { ReactElement } from "react";
-export type TabsPropType = {
-  children: React.ReactNode;
-};
-export type TabsContextType = {
-  activeTab?: number;
-  onChange: (key: number) => void;
-};
-export const TabsContext = React.createContext<TabsContextType | null>(null);
-export function useTabsContext() {
-  const context = React.useContext(TabsContext);
-  if (!context) return;
-  return context;
-}
-
+import React from "react";
+import { TabsPropType, PropType, TabProps } from "../types";
+import { useTabsContext, TabsContext } from "../context";
 const Tabs = ({ children }: TabsPropType) => {
   const [activeTab, setActiveTab] = React.useState<number>(0);
   const onChange = React.useCallback(
@@ -29,23 +17,15 @@ const Tabs = ({ children }: TabsPropType) => {
     </TabsContext.Provider>
   );
 };
-type PropType = {
-  children: React.ReactNode;
-  onClick?: () => void;
-};
 
-type TabProps = {
-  onClick?: () => void;
-  children: ReactElement;
-};
 const TabList = ({ children }: PropType) => {
-  const { onChange } = useTabsContext();
+  const handleChange = useTabsContext();
   const tabList = React.Children.map(children, (child, index) => {
     if (!React.isValidElement<TabProps>(child)) {
       return null;
     }
     return React.cloneElement(child, {
-      onClick: () => onChange(index),
+      onClick: () => handleChange?.onChange(index),
     });
   });
   return <div className="tab-list">{tabList}</div>;
@@ -58,12 +38,12 @@ const Tab = ({ children, onClick }: PropType) => {
   );
 };
 const TabPanels = ({ children }: PropType) => {
-  const { activeTab } = useTabsContext();
+  const activeTab = useTabsContext();
   const tabPanels = React.Children.map(children, (child, index) => {
     if (!React.isValidElement(child)) {
       return null;
     }
-    return activeTab === index ? child : null;
+    return activeTab?.activeTab === index ? child : null;
   });
   return <div className="tab-panels">{tabPanels}</div>;
 };
