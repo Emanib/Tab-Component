@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { TabsPropType, PropType, TabProps } from "../types";
 import { useTabsContext, TabsContext } from "../context";
 const Tabs = ({ children }: TabsPropType) => {
@@ -25,13 +26,14 @@ const TabList = ({ children }: PropType) => {
     }
     return React.cloneElement(child, {
       onClick: () => handleChange?.onChange(index),
+      isActive: handleChange?.activeTab === index,
     });
   });
   return <div className="tab-list">{tabList}</div>;
 };
-const Tab = ({ children, onClick }: PropType) => {
+const Tab = ({ children, onClick, isActive }: PropType) => {
   return (
-    <div className="tab" onClick={onClick}>
+    <div className={`tab ${isActive ? "active" : ""}`} onClick={onClick}>
       {children}
     </div>
   );
@@ -42,6 +44,7 @@ const TabPanels = ({ children }: PropType) => {
     if (!React.isValidElement(child)) {
       return null;
     }
+
     return activeTab?.activeTab === index ? child : null;
   });
   return <div className="tab-panels">{tabPanels}</div>;

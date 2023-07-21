@@ -5,7 +5,6 @@ import Tabs from "./components/Tabs";
 function App() {
   return (
     <>
-      <div>Tab Component</div>
       <Tabs>
         <Tabs.TabList>
           <Tabs.Tab>One</Tabs.Tab>

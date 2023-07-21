@@ -1,0 +1,35 @@
+.tabs{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.tab-list {
+	display: flex;
+	justify-content: space-around;
+	color: white;
+	font-size: medium;
+   border-radius: 10px;
+	cursor: pointer;
+	background: #1E3A8A33;
+	padding: 10px 15px;
+	opacity: 1;
+	margin: 10px;
+}
+.tab {
+padding: 10px  20px;
+}
+ .active {
+	background-color: white;
+	color:rgb(53,178,246);
+	border-radius: 10px;
+
+}
+.tab-panels {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	height: 30vh;
+	margin: 10px;
+	 border-radius: 10px;
+}
