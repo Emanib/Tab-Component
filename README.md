@@ -30,5 +30,7 @@ npm install
         </Tabs.TabPanels>
       </Tabs>
 ```
+## Live Demo
+Check out the live demo of the Tabs component [here](https://tab-component-98.netlify.app/).
 
 
