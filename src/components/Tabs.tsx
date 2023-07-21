@@ -2,6 +2,12 @@ import React from "react";
 import "./style.css";
 import { TabsPropType, PropType, TabProps } from "../types";
 import { useTabsContext, TabsContext } from "../context";
+/**
+ * Parent Component
+ * @param children
+ * @returns JSX Element
+ */
+
 const Tabs = ({ children }: TabsPropType) => {
   const [activeTab, setActiveTab] = React.useState<number>(0);
   const onChange = React.useCallback(
@@ -18,6 +24,11 @@ const Tabs = ({ children }: TabsPropType) => {
     </TabsContext.Provider>
   );
 };
+/**
+ * Tabs Headers
+ * @param children tabs list
+ * @returns JSX Element
+ */
 const TabList = ({ children }: PropType) => {
   const handleChange = useTabsContext();
   const tabList = React.Children.map(children, (child, index) => {
@@ -31,6 +42,13 @@ const TabList = ({ children }: PropType) => {
   });
   return <div className="tab-list">{tabList}</div>;
 };
+/**
+ * Tab
+ * @param children
+ * @param onClick Function
+ * @param isActive for active tab
+ * @returns JSX Element
+ */
 const Tab = ({ children, onClick, isActive }: PropType) => {
   return (
     <div className={`tab ${isActive ? "active" : ""}`} onClick={onClick}>
@@ -38,6 +56,11 @@ const Tab = ({ children, onClick, isActive }: PropType) => {
     </div>
   );
 };
+/**
+ * Tab Panels
+ * @param children tab container content
+ * @returns JSX Element
+ */
 const TabPanels = ({ children }: PropType) => {
   const activeTab = useTabsContext();
   const tabPanels = React.Children.map(children, (child, index) => {
@@ -49,6 +72,11 @@ const TabPanels = ({ children }: PropType) => {
   });
   return <div className="tab-panels">{tabPanels}</div>;
 };
+/**
+ * Tab Panel
+ * @param children tab  content
+ * @returns JSX Element
+ */
 const Panel = ({ children }: PropType) => {
   return <div className="tab-panel">{children}</div>;
 };
